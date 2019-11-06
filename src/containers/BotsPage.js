@@ -24,29 +24,29 @@ class BotsPage extends React.Component {
     )
   }
 
-  clickEnlist = (id) => {
-    let botToEnlist = this.state.allBots.find(bot => bot.id == id)
-    !this.state.enlistedBots.includes(botToEnlist) ?
+  clickEnlist = (bot) => {
+    // let botToEnlist = this.state.allBots.find(bot => bot.id == id)
+    !this.state.enlistedBots.includes(bot) ?
     this.setState(prevState => ({
-      enlistedBots: [...prevState.enlistedBots, botToEnlist],
+      enlistedBots: [...prevState.enlistedBots, bot],
       specsView: false
     }))
     : 
     null
   }
 
-  clickDischarge = (id) => {
-    let botToDischarge = this.state.allBots.find(bot => bot.id == id)
-    this.state.enlistedBots.includes(botToDischarge)?
+  clickDischarge = (bot) => {
+    // let botToDischarge = this.state.allBots.find(bot => bot.id == id)
+    this.state.enlistedBots.includes(bot)?
     this.setState(prevState => ({
-      enlistedBots: [...prevState.enlistedBots.filter(bot => bot.id !== id)]
+      enlistedBots: [...prevState.enlistedBots.filter(eachBot => eachBot !== bot)]
     }))
     :
     null
   }
 
-  clickSelectBot = (id) => {
-    let clickedBot = this.state.allBots.find(bot => bot.id == id)
+  clickSelectBot = (bot) => {
+    let clickedBot = this.state.allBots.find(eachBot => eachBot == bot)
     this.setState({
       specsView: true,
       selectedBot: clickedBot
