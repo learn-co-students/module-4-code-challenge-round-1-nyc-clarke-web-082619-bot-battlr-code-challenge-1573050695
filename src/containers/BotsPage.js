@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from "../components/BotSpecs";
 
 class BotsPage extends React.Component {
 
@@ -8,6 +9,10 @@ class BotsPage extends React.Component {
     bots: [],
     botArmy: false 
   }
+
+  /* I had also tried making botArmy and array and adding to that array by setting
+  state while I was mapping botArmy: [...this.state.botArmy] + bot but was having
+  difficulties with this in my code */ 
 
   componentDidMount() { 
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
@@ -17,24 +22,38 @@ class BotsPage extends React.Component {
       }))
   }
 
-  /* Here I tried to create the botArmy state inside of updateBots 
+
+  updateBots = (id) => { 
+    let bots = this.state.bots 
+    return bots.map(bot => { 
+      if (bot.id === id) {
+        return <BotSpecs bot={bot} updateBots={this.updateBots}/> 
+      } else { 
+        return bots
+      }
+    }) 
+  }
+
+
+    /* Here I tried to create the botArmy state inside of updateBots 
   so that it only created the state on that bot. The goal was to be able to toggle
   between true and false. When I console log I am able to get back the id that 
   I need however it keeps changing all states instead of just 1.  */ 
+  
 
-  updateBots = (id) => { 
-    let bots = this.state.bots
-     return this.state.bots.map(bot => { 
-        if(bot.id === id) { 
-          this.setState({ 
-            botArmy: true 
-            //wanted this to be botArmy: !this.state.botArmy 
-          })
-      } else {
-        return bots
-      }
-    })
-  }
+  // updateBots = (id) => { 
+  //   let bots = this.state.bots
+  //    return this.state.bots.map(bot => { 
+  //       if(bot.id === id) { 
+  //        return  this.setState({ 
+  //           botArmy: true 
+  //           //wanted this to be botArmy: !this.state.botArmy 
+  //         })
+  //     } else {
+  //       return bots
+  //     }
+  //   })
+  // }
 
   
   /* I also tried invoking update bots in the bots attribute so that way it would run through
