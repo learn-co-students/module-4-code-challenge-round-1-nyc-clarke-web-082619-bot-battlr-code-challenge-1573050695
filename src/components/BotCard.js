@@ -20,11 +20,11 @@ const BotCard = props => {
   }
 
   function handleClick(){
-    if (bot.enlisted){
-      props.removeBot(bot.id)
-    } else {
+    // if (bot.enlisted){
+    //   props.removeBot(bot.id)
+    // } else {
       props.setSelectedBot(bot.id)
-    }
+    // }
   }
 
   return (

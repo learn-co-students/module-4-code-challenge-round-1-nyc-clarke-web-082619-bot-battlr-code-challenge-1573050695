@@ -5,6 +5,24 @@ const BotSpecs = props => {
 
   let botType;
 
+  function enlistButton(){
+    if(bot.enlisted){
+      return (<button
+        className="ui button fluid"
+        onClick={() => {props.removeBot(bot.id)}}
+      >
+        Remove From Army
+      </button>)
+    } else {
+      return (<button
+        className="ui button fluid"
+        onClick={props.enlistBot}
+      >
+        Enlist
+      </button>)
+    }
+  }
+
   switch (bot.bot_class) {
     case "Assault":
       botType = <i className="icon large circular military" />;
@@ -64,12 +82,13 @@ const BotSpecs = props => {
             >
               Go Back
             </button>
-            <button
+            {/* <button
               className="ui button fluid"
               onClick={props.enlistBot}
             >
               Enlist
-            </button>
+            </button> */}
+            {enlistButton()}
           </div>
         </div>
       </div>

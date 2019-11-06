@@ -5,7 +5,8 @@ class YourBotArmy extends React.Component {
   //your bot army code here...
 
   renderBotCards = () =>{
-	  return this.props.yourBotArmy.map((bot) => {
+    let botArmy = this.props.botCollection.filter(bot => bot.enlisted)
+	  return botArmy.map((bot) => {
 		  return <BotCard bot={bot} key={bot.id} setSelectedBot={this.props.setSelectedBot} removeBot={this.props.removeBot}/>
 	  })
   }
@@ -16,7 +17,6 @@ class YourBotArmy extends React.Component {
         <div className="ui five column grid">
           <div className="row bot-army-row">
             {this.renderBotCards()}
-            Your Bot Army
           </div>
         </div>
       </div>

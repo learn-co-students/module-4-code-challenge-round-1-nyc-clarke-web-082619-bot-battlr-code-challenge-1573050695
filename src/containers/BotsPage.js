@@ -6,10 +6,8 @@ import BotSpecs from '../components/BotSpecs'
 const URL = 'https://bot-battler-api.herokuapp.com/api/v1/bots';
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
   state ={
     botCollection: [],
-    yourBotArmy: [],
     selectedBot: null,
     listView: true
   }
@@ -27,43 +25,41 @@ class BotsPage extends React.Component {
   }
 
   setSelectedBot = (id) => {
-    let allBots = this.state.botCollection.concat(this.state.yourBotArmy);
+    let allBots = this.state.botCollection;
 
     let targetBot = allBots.find(bot => bot.id == id);
 
     this.setState({selectedBot: targetBot, listView: false});
   }
 
+
   enlistBot = () => {
+
     let newCollection = this.state.botCollection.map(bot => {
-      if (bot.id != this.state.selectedBot.id){
-        return bot;
+      if (bot.id == this.state.selectedBot.id){
+        return {...bot, enlisted: true}
       } else {
-        return null;
+        return bot
       }
-    });
+    })
 
-    newCollection = newCollection.filter(bot => bot)
-    let newYourBotArmy = this.state.yourBotArmy.concat({...this.state.selectedBot, enlisted: true })
-
-    this.setState({ botCollection: newCollection, yourBotArmy: newYourBotArmy, listView: true})
+    this.setState({botCollection: newCollection, listView: true})
   }
 
+
+
+
   removeBot = (id) => {
-    let targetBot = this.state.yourBotArmy.find(bot => bot.id == id)
 
-    let newYourBotArmy = this.state.yourBotArmy.map(bot => {
-      if (bot.id != id){
-        return bot;
+    let newCollection = this.state.botCollection.map(bot => {
+      if (bot.id == id){
+        return {...bot, enlisted: false}
       } else {
-        return null;
+        return bot
       }
-    });
+    })
 
-    newYourBotArmy = newYourBotArmy.filter(bot => bot)
-    let newCollection = this.state.botCollection.concat({...targetBot, enlisted: false })
-
-    this.setState({ botCollection: newCollection, yourBotArmy: newYourBotArmy})
+    this.setState({botCollection: newCollection, listView: true})
   }
 
   setListView = () => {
@@ -75,19 +71,20 @@ class BotsPage extends React.Component {
     if (this.state.listView){
     return (
       <div>
-        {/* put your components here */}
-        <YourBotArmy yourBotArmy={this.state.yourBotArmy}  removeBot={this.removeBot}/>
+        <YourBotArmy botCollection={this.state.botCollection} removeBot={this.removeBot} setSelectedBot={this.setSelectedBot}/>
         < BotCollection botCollection={this.state.botCollection} 
         setSelectedBot={this.setSelectedBot}
+        removeBot={this.removeBot}
         />
       </div>
     )} else {
       return(
         <div>
-        <YourBotArmy yourBotArmy={this.state.yourBotArmy} removeBot={this.removeBot}/>
+        <YourBotArmy botCollection={this.state.botCollection} removeBot={this.removeBot} setSelectedBot={this.setSelectedBot}/>
          <BotSpecs bot={this.state.selectedBot} 
       enlistBot={this.enlistBot}
-      setListView={this.setListView}/>
+      setListView={this.setListView}
+      removeBot={this.removeBot}/>
       </div>)
     }
   }
