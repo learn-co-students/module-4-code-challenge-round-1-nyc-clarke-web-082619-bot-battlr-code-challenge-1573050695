@@ -4,7 +4,7 @@ import YourBotArmy from './YourBotArmy'
 import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
+
   state = {
     allBots: [],
     shownBots: [],
@@ -25,7 +25,6 @@ class BotsPage extends React.Component {
   }
 
   clickEnlist = (bot) => {
-    // let botToEnlist = this.state.allBots.find(bot => bot.id == id)
     !this.state.enlistedBots.includes(bot) ?
     this.setState(prevState => ({
       enlistedBots: [...prevState.enlistedBots, bot],
@@ -36,7 +35,6 @@ class BotsPage extends React.Component {
   }
 
   clickDischarge = (bot) => {
-    // let botToDischarge = this.state.allBots.find(bot => bot.id == id)
     this.state.enlistedBots.includes(bot)?
     this.setState(prevState => ({
       enlistedBots: [...prevState.enlistedBots.filter(eachBot => eachBot !== bot)]
@@ -60,11 +58,21 @@ class BotsPage extends React.Component {
     })
   }
 
+  // clickDisband = () =>{
+  //   this.setState({
+  //     enlistedBots: []
+  //   })
+  //   console.log(this.state.enlistedBots)
+  // }
+
   render() {
-    // console.log(this.state.selectedBot)
     return (
       <div>
-        < YourBotArmy {...this.state} clickHandle={this.clickDischarge}/>
+        < YourBotArmy 
+          {...this.state} 
+          clickHandle={this.clickDischarge} 
+          // clickDisband={this.clickDisband} 
+        />
         {!this.state.specsView ?
           < BotCollection {...this.state} 
             // clickHandle={this.clickEnlist} 
@@ -76,7 +84,6 @@ class BotsPage extends React.Component {
       </div>
     );
   }
-
 }
 
 export default BotsPage;

@@ -16,7 +16,7 @@ class BotCollection extends React.Component {
   render(){
   	return (
   	  <div className="ui four column grid">
-			<select className='dropdown' onChange={this.onChangeFilter} >
+			<select className='center' onChange={this.onChangeFilter} >
 				<option value='None' selected disabled>Filter By Class</option>
 				<option value='None'>None</option>
 				<option value='Assault'>Assault</option>
@@ -34,12 +34,10 @@ class BotCollection extends React.Component {
 						<BotCard bot={bot} clickHandle={this.props.clickHandle} />	
 					)
 				}
-    		  {/* Collection of all bots */}
     		</div>
   	  </div>
   	);
   }
-
 };
 
 export default BotCollection;
