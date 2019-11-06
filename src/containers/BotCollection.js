@@ -15,7 +15,7 @@ class BotCollection extends React.Component {
 		})
 	}
 
-	removeBot = () => {
+	clearBot = () => {
 		this.setState({
 			currentBot: {}
 		})
@@ -38,7 +38,7 @@ class BotCollection extends React.Component {
 			return(
 				<BotSpecs
 				bot={this.state.currentBot}
-				goBack={this.removeBot}
+				goBack={this.clearBot}
 				joinArmy={this.props.joinArmy}
 				/>)
 		}

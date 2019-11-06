@@ -12,7 +12,6 @@ class BotsPage extends React.Component {
     myArmy: [],
   }
 
-
   componentDidMount(){
     fetch(API)
       .then(resp => resp.json())
@@ -33,13 +32,21 @@ class BotsPage extends React.Component {
     }
   }
 
-
+  removeFromArmy = (botObj) => {
+    if(this.state.myArmy.includes(botObj)){
+      const armyCopy = this.state.myArmy.slice()
+      const newArmyList = armyCopy.filter(bot => bot.id !== botObj.id)
+        this.setState({
+          myArmy: newArmyList
+        })
+    }
+  }
 
   render() {
     return (
       <div>
-        <BotCollection bots={this.state.bots} myArmy={this.state.myArmy} joinArmy={this.joinArmy}/>
-        <YourBotArmy bots={this.state.myArmy}/>
+        <BotCollection bots={this.state.bots} joinArmy={this.joinArmy} />
+        <YourBotArmy bots={this.state.myArmy} removeFromArmy={this.removeFromArmy} />
       </div>
     );
   }

@@ -24,8 +24,9 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => props.showBot(bot)}
+        onClick={() => props.removeFromArmy ? props.removeFromArmy(bot) : props.showBot(bot)}
       >
+      {/* didn't have time to finish ternary */}
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
         </div>
