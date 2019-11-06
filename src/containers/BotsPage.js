@@ -8,7 +8,8 @@ class BotsPage extends React.Component {
   state = {
     allBots: [],
     availableBots: [],
-    myArmy: []
+    myArmy: [],
+    specBot: null
   }
 
   fetchBots = () => {
@@ -24,6 +25,23 @@ class BotsPage extends React.Component {
 
   componentDidMount = () => {
     this.fetchBots()
+  }
+
+  //define the selected bot to show specs
+  showSpecView = (id) => {
+    let selectedBot = this.state.availableBots.find(bot => bot.id === id);
+    if(selectedBot){
+      this.setState({
+        specBot: selectedBot
+      })
+    }
+    if(selectedBot === null){
+      let selectedBot = this.state.myArmy.find(bot => bot.id === id);
+      this.setState({
+        specBot: null
+      })
+      this.enlist(selectedBot.id)
+    }
   }
 
   enlist = (id) => {
@@ -45,7 +63,7 @@ class BotsPage extends React.Component {
       availableBots: copyAvailable,
       myArmy: copyMyArmy
     })
-
+    this.showSpecView(null)
   }
 
   render() {
@@ -60,7 +78,8 @@ class BotsPage extends React.Component {
         <BotCollection 
           enlist={this.enlist}
           availableBots={this.state.availableBots}
-
+          showSpecView={this.showSpecView}
+          specBot={this.state.specBot}
         />
       </div>
     );
