@@ -2,7 +2,7 @@ import React from "react";
 
 const BotSpecs = props => {
   let { bot } = props;
-
+  let armyBots = Array.from(props.armyBot).includes(bot.id)
   let botType;
 
   switch (bot.bot_class) {
@@ -60,8 +60,7 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log('connect this to a function that shows all bots')
+              onClick={() => props.handleSpecChange(bot.id)
               }
             >
               Go Back
@@ -69,12 +68,10 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
+                  armyBots ? props.handleArmyClick(bot.id, 'remove') : props.handleArmyClick(bot.id, 'add')
               }
             >
-              Enlist
+              {armyBots ? 'Remove' : 'Enlist'}
             </button>
           </div>
         </div>

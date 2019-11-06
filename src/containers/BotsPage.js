@@ -1,12 +1,15 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = { 
     bots: {},
-    armyBot: new Set()
+    armyBot: new Set(),
+    specPage: false,
+    selectedBot: 101
   }
 
   componentDidMount(){
@@ -19,29 +22,39 @@ class BotsPage extends React.Component {
     })
   }
 
-  handleArmyClick = (id,from) => {
-    if(from === "add"){
+  handleArmyClick = (id,action) => {
+    if(action === "add"){
       let curSet = this.state.armyBot.add(id)
       this.setState({
-        armyBot: curSet
+        armyBot: curSet,
+        specPage: false
       })
     }else{
       this.state.armyBot.delete(id)
       this.setState({
-        armyBot: this.state.armyBot
+        armyBot: this.state.armyBot,
+        specPage: false
       })
     }
   } 
 
+  handleSpecChange = (id) =>{
+    this.setState({
+      specPage: !this.state.specPage,
+      selectedBot: id
+    })
+  }
+
 
   render() {
-    // console.log(this.state.armyBot)
+    console.log()
     return (
       <div>
-        <YourBotArmy {...this.state} handleArmyClick={this.handleArmyClick}/>
-        <BotCollection {...this.state} handleArmyClick={this.handleArmyClick}/>
+        <YourBotArmy {...this.state} handleArmyClick={this.handleArmyClick} handleSpecChange={this.handleSpecChange}/>
         
-        {/* put your components here */}
+        {!this.state.specPage ? <BotCollection {...this.state} handleSpecChange={this.handleSpecChange}/> : <BotSpecs {...this.state} bot={this.state.bots[`${this.state.selectedBot}`]} handleSpecChange={this.handleSpecChange} handleArmyClick={this.handleArmyClick}/>}
+        
+        // {/* put your components here */}
       </div>
     );
   }
