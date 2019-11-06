@@ -30,7 +30,7 @@ class App extends Component {
       let array = this.state.army;
       let index = this.state.army.indexOf(item);
       array.splice(index,1);
-      console.log(array)
+      // console.log(array)
       // console.log(index);
       this.setState({
         army: array
