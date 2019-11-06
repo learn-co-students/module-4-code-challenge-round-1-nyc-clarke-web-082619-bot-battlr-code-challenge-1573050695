@@ -1,7 +1,7 @@
 import React from "react";
 
 const BotCard = props => {
-  const { bot, selectBots, parent } = props;
+  const { bot, selectBot, parent, toggleEnlist} = props;
 
   let botType;
 
@@ -24,7 +24,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={(event) => selectBots(event, bot.id, parent)}
+        onClick={parent !== "My Bot" ? () => selectBot(bot.id) : () => toggleEnlist(bot.id, parent)}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
