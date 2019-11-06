@@ -1,14 +1,20 @@
 import React from "react";
 import BotCollection from './BotCollection';
 import YourBotArmy from './YourBotArmy';
+import BotSpecs from '../components/BotSpecs';
+import { Search } from 'semantic-ui-react'
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots";
 
 class BotsPage extends React.Component {
 
   state = {
     bots: new Map(),
-    botsArmy: new Set()
+    botsArmy: new Set(),
+    showBotBool: false,
+    botToShow: {},
+    searchTerm: ""
   }
+
   componentDidMount() {
     fetch(API)
       .then (resp => resp.json())
@@ -22,7 +28,7 @@ class BotsPage extends React.Component {
     let botSet = this.state.botsArmy;
     let newBot = this.state.bots.get(id);
     botSet.add(newBot)
-    this.setState(()=>({botsArmy: botSet})) 
+    this.setState(()=>({botsArmy: botSet,showBotBool: false})) 
   }
 
   removeBotFromArmy = (id) => {
@@ -32,13 +38,32 @@ class BotsPage extends React.Component {
     this.setState(()=>({botsArmy: botSet}))
   }
 
+  showBotSpecs = (id) => {
+    let bot = this.state.bots.get(id);
+    this.setState(() => ({showBotBool: true, botToShow: bot})) 
+  }
+
+  goBack = () => {
+    this.setState(()=>({showBotBool:false, botToShow: {}}))
+  }
+
+  searchBots =(event,value) => {
+     this.setState(()=>({searchTerm: value.value}))
+  }
+
   render() {
     console.log(this.state)
     return (
       <div>
         <YourBotArmy removeBotFromArmy={this.removeBotFromArmy} botsArmy={this.state.botsArmy}/>
-        <BotCollection addBotToArmy={this.addBotToArmy} bots={this.state.bots} /> 
-        
+        {this.state.showBotBool ? 
+          <BotSpecs goBack={this.goBack} addBotToArmy={this.addBotToArmy} {...this.state.botToShow}/> 
+        : 
+          <div>
+            <Search className="searchBar" value={this.state.searchTerm} onSearchChange={((event,value) => this.searchBots(event,value))} showNoResults={false}/>
+            <BotCollection searchTerm={this.state.searchTerm} showBotSpecs={this.showBotSpecs} bots={this.state.bots} /> 
+          </div>
+        }
       </div>
     );
   }

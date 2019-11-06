@@ -7,7 +7,8 @@ class BotCollection extends React.Component {
   renderBots = () => {
 	let botsArray = [];
 	for(const bot of this.props.bots.values()){
-		botsArray.push(< BotCard addBotToArmy={this.props.addBotToArmy} {...bot}/>);
+		if(this.searchTerm !== "" && bot.name.includes(this.props.searchTerm))
+			botsArray.push(< BotCard showBotSpecs={this.props.showBotSpecs} addBotToArmy={this.props.addBotToArmy} {...bot}/>);
 	}
 	return botsArray
   }

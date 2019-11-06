@@ -23,14 +23,14 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.id}
-        onClick={() => props.removeBotFromArmy !== undefined ? props.removeBotFromArmy(props.id) : props.addBotToArmy(props.id)}
+        onClick={() => props.removeBotFromArmy !== undefined ? props.removeBotFromArmy(props.id) : props.showBotSpecs(props.id)}        
       >
         <div className="image">
           <img alt="oh no!" src={props.avatar_url} />
         </div>
         <div className="content">
           <div className="header">
-            {props.name} {props.Type}
+            {props.name} {botType}
           </div>
 
           <div className="meta text-wrap">

@@ -9,6 +9,11 @@
   min-height: 100%;
 }
 
+.searchBar{
+  text-align: center;
+  margin: 20px;
+}
+
 .ui.grid {
   padding: 0px 20px;
 }
