@@ -2,7 +2,7 @@ import React from "react";
 
 const BotSpecs = props => {
   let { bot } = props;
-
+  console.log(bot) 
   let botType;
 
   switch (bot.bot_class) {
@@ -20,6 +20,7 @@ const BotSpecs = props => {
   }
 
   return (
+    
     <div className="ui segment">
       <div className="ui two column centered grid">
         <div className="row">

@@ -24,11 +24,13 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={
-          props.name === 'bots' ?
-          () => props.enlistBot(props.bot.id) :
-          () => props.removeFromArmy(props.bot.id)
-        }
+        onClick={ () => props.toggleDetails(props.bot.id)  }
+        
+        // { move code below to the BotSpecs
+          // props.name === 'bots' ?
+          // () => props.enlistBot(props.bot.id) :
+          // () => props.removeFromArmy(props.bot.id)
+        // }
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />

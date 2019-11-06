@@ -24,16 +24,16 @@ class BotsPage extends React.Component {
     this.setState({
       myBotArmy: [...this.state.myBotArmy, newBot]
     })
-    this.removeBot(id)
+    // this.removeBot(id)
   }
 
-  removeBot = (id) => { //removes bot from bots array
-    let updatedBots = this.state.bots.filter( bot => bot.id !== id);
+  // removeBot = (id) => { //removes bot from bots array
+  //   let updatedBots = this.state.bots.filter( bot => bot.id !== id);
 
-    this.setState({
-      bots: updatedBots
-    })
-  }
+  //   this.setState({
+  //     bots: updatedBots
+  //   })
+  // }
 
   removeFromArmy = (id) => { // removes a bot from myArmy
     // console.log(id)
@@ -48,7 +48,7 @@ class BotsPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.myBotArmy)
+    // console.log(this.state.myBotArmy)
     return (
       <div>
         <YourBotArmy removeFromArmy={this.removeFromArmy} myBotArmy={this.state.myBotArmy} /> 
