@@ -11,7 +11,7 @@ const BotSpecs = props => {
         className="ui button fluid"
         onClick={() => {props.removeBot(bot.id)}}
       >
-        Remove From Army
+        Discharge
       </button>)
     } else {
       return (<button
@@ -82,12 +82,6 @@ const BotSpecs = props => {
             >
               Go Back
             </button>
-            {/* <button
-              className="ui button fluid"
-              onClick={props.enlistBot}
-            >
-              Enlist
-            </button> */}
             {enlistButton()}
           </div>
         </div>
