@@ -12,3 +12,8 @@
 .ui.grid {
   padding: 0px 20px;
 }
+
+.dropdown {
+ margin: auto;
+ margin-top: 5px; 
+}

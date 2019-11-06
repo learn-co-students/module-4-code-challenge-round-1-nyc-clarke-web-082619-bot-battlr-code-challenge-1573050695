@@ -16,7 +16,8 @@ class BotCollection extends React.Component {
   render(){
   	return (
   	  <div className="ui four column grid">
-			<select onChange={this.onChangeFilter} value={this.state.filterSelected} >
+			<select className='dropdown' onChange={this.onChangeFilter} >
+				<option value='None' selected disabled>Filter By Class</option>
 				<option value='None'>None</option>
 				<option value='Assault'>Assault</option>
 				<option value='Defender'>Defender</option>
