@@ -9,7 +9,7 @@ class BotCollection extends React.Component {
   	  <div className="ui four column grid">
     		<div className="row">
 			  {/* ...and here.. */}
-			  {this.props.bots.map(bot=><BotCard {...bot} key={bot.id} addToArmy={this.props.addToArmy}/>)}
+			  {this.props.bots.map(bot=><BotCard {...bot} key={bot.id} addToArmy={this.props.addToArmy} show={this.props.show}/>)}
     		  Collection of all bots
     		</div>
   	  </div>

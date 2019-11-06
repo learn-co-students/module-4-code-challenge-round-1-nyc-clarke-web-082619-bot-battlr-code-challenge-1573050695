@@ -6,7 +6,9 @@ class App extends Component {
 
   state={
     bots: [],
-    army: []
+    army: [],
+    showSpec: false,
+    bot: null
   }
 
   componentDidMount(){
@@ -40,7 +42,21 @@ class App extends Component {
     }
   }
 
+  show = (id) => {
+    // console.log(id);
+    let item = this.state.bots.find(bot=> bot.id === id);
+    this.setState({
+      showSpec: true,
+      bot: item
+    })
+  }
  
+  showAllBots = () => {
+    this.setState({
+      showSpec: false,
+      bot: null
+    })
+  }
 
   render() {
     return (
@@ -48,6 +64,10 @@ class App extends Component {
         <BotsPage bots={this.state.bots} 
               addToArmy={this.addToArmy}
               army={this.state.army}
+              show={this.show}
+              showSpec={this.state.showSpec}
+              bot={this.state.bot}
+              showAllBots={this.showAllBots}
               />
       </div>
     );
