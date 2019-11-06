@@ -11,7 +11,7 @@ class BotCollection extends React.Component {
 				{this.props.shownBots.map(bot => 
 					<BotCard bot={bot} clickHandle={this.props.clickHandle} />	
 				)}
-    		  Collection of all bots
+    		  {/* Collection of all bots */}
     		</div>
   	  </div>
   	);

@@ -12,7 +12,7 @@ class YourBotArmy extends React.Component {
             {this.props.enlistedBots.map(bot => {
               return < BotCard bot={bot} clickHandle={this.props.clickHandle} />
             })}
-            Your Bot Army
+            {/* Your Bot Army */}
           </div>
         </div>
       </div>
